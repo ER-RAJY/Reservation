@@ -1,8 +1,11 @@
 <?php
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\CalendarController;
 
-Route::get('/', [RoomController::class, 'calendar']);
-Route::get('/api/rooms', [RoomController::class, 'index']);
-Route::get('/api/reservations', [ReservationController::class, 'index']);
-Route::post('/api/reservations/update', [ReservationController::class, 'update']);
+
+Route::get('/calendar/timeline', [CalendarController::class, 'index'])->name('calendar.timeline');
+Route::get('/events', [CalendarController::class, 'getEvents'])->name('events.index');
+Route::get('/events/check-availability', [CalendarController::class, 'checkAvailability'])->name('events.check-availability');
+Route::post('/events', [CalendarController::class, 'store'])->name('events.store');
+Route::put('/events/{id}', [CalendarController::class, 'update'])->name('events.update');
+Route::post('/events/{id}/extend', [CalendarController::class, 'extend'])->name('events.extend');
+Route::delete('/events/{id}', [CalendarController::class, 'destroy'])->name('events.destroy');
